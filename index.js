@@ -2,18 +2,18 @@ import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 
 const criteria = {
-    'Физкультура': 'Физическая культура',
-    'История': 'История',
-    'Ин.язык в проф. деятельности - Шлыкова (СПб)': 'Ин. язык Шлыкова',
-    'Ин.язык в проф. деятельности - Жернакова (СПб)': 'Ин. язык Жернакова',
-    'Дискретная математика_Фархетдинова': 'Дискретная математика',
-    'Теория вероятностей и математическая статистика_Фархетдинова': 'Теория вероятностей и математическая статистика',
-    'Разработка программных модулей_Цветкова (СПб)': 'РПМ Цветкова',
-    'Разработка программных модулей_Шайдаюк (СПб)': 'РПМ Шайдаюк',
-    'Прикладное программирование_Шайдаюк (СПб)': 'Прикладное программирование Шайдаюк',
-    'Прикладное программирование_Цветкова (СПб)': 'Прикладное программирование Цветкова',
-    'Основы алгоритмизации и программирования_Цветкова': 'Основы алгоритмизации и программирования (ПП)',
-    'Основы проектирования баз данных_Цветкова': 'Основы проектирования баз данных (ПП)',
+    'Физкультура':                                                  'Физическая культура                             \t',
+    'История':                                                      'История                                         \t',
+    'Ин.язык в проф. деятельности - Шлыкова (СПб)':                 'Ин. язык Шлыкова                                \t',
+    'Ин.язык в проф. деятельности - Жернакова (СПб)':               'Ин. язык Жернакова                              \t',
+    'Дискретная математика_Фархетдинова':                           'Дискретная математика                           \t',
+    'Теория вероятностей и математическая статистика_Фархетдинова': 'Теория вероятностей и математическая статистика \t',
+    'Разработка программных модулей_Цветкова (СПб)':                'РПМ Цветкова                                    \t',
+    'Разработка программных модулей_Шайдаюк (СПб)':                 'РПМ Шайдаюк                                     \t',
+    'Прикладное программирование_Шайдаюк (СПб)':                    'Прикладное программирование Шайдаюк             \t',
+    'Прикладное программирование_Цветкова (СПб)':                   'Прикладное программирование Цветкова            \t',
+    'Основы алгоритмизации и программирования_Цветкова':            'Основы алгоритмизации и программирования (ПП)   \t',
+    'Основы проектирования баз данных_Цветкова':                    'Основы проектирования баз данных (ПП)           \t',
 };
 
 const parseLesson = ($lesson) => {
@@ -63,15 +63,29 @@ const printLessons = (criteria, results) => {
     }
 };
 
-const main = async (urls) => {
+const generateUrls = (startingUrl, startDate, endDate) => {
+    const urls = [];
+    let currentDate = new Date(startDate);
+    while (currentDate <= endDate) {
+        const dateString = currentDate.toISOString().slice(0, 10);
+        urls.push(startingUrl.replace('2024-01-15', dateString));
+        currentDate.setDate(currentDate.getDate() + 7);
+    }
+    return urls;
+};
+
+const main = async () => {
+    const startingUrl = 'https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/6/lessons?date=2024-01-15';
+    const startingDate = new Date('2024-01-15');
+    const endingDate = new Date('2024-04-15');
+    const urls = generateUrls(startingUrl, startingDate, endingDate);
+
     const browser = await puppeteer.launch();
-    const results = [];
     try {
-        for (const url of urls) {
+        const results = await Promise.all(urls.map(async (url) => {
             const page = await browser.newPage();
-            const lessons = await parsePage(url, page);
-            results.push(lessons);
-        }
+            return await parsePage(url, page);
+        }));
         printColumns(urls);
         printLessons(criteria, results);
     } catch (error) {
@@ -81,22 +95,4 @@ const main = async (urls) => {
     }
 };
 
-const startingUrl = 'https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/6/lessons?date=2024-01-15';
-const startingDate = new Date('2024-01-15');
-const endingDate = new Date('2024-04-15');
-const urls = [startingUrl];
-let date = new Date(startingDate);
-while (date <= endingDate) {
-    date.setDate(date.getDate() + 7);
-    const dateString = '2024-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
-    const url = startingUrl.replace('2024-01-15', dateString);
-    urls.push(url);
-}
-urls.pop();
-
-main(urls);
-
-
-
-
-
+main();
