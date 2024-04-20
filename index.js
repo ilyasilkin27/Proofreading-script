@@ -85,7 +85,7 @@ const promptForUrl = () => {
     });
 
     return new Promise((resolve) => {
-        rl.question('Please enter the URL: ', (url) => {
+        rl.question('Пожалуйста введите ссылку: ', (url) => {
             rl.close();
             resolve(url);
         });
@@ -109,7 +109,7 @@ const main = async () => {
         const data = columns + rows;
 
         fs.writeFileSync('schedule.csv', data);
-        console.log('CSV file created successfully!');
+        console.log('CSV файл успешно создан!');
     } catch (error) {
         console.error(error);
     } finally {
