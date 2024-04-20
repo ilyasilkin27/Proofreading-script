@@ -9,7 +9,7 @@
 
 ### Примеры ссылок
 
-Для группы 1103-Д: https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/9/lessons?date=2024-01-15
+Для группы 1103-Д: https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/9/lessons?date=2024-01-15  
 Для группы 1105-О: https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/5/lessons?date=2024-01-15
 
 ## Как менять даты обхода
