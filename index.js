@@ -27,9 +27,6 @@ const parsePage = async (url, page) => {
         const type = $(element).find(':nth-child(2)').text().trim();
         const typeLabel = type === '(ПР)' ? 'Практика' : 'Лекция';
         const label = criteria[name];
-        // console.log('name', name);
-        // console.log('label', label);
-        // console.log('typeLabel', typeLabel);
         if (label) {
             lessons.push({ name, label, typeLabel });
         }
@@ -39,8 +36,6 @@ const parsePage = async (url, page) => {
 };
 
 const main = async (urls) => {
-    // const browser = await puppeteer.launch();
-    // const page = await browser.newPage();
     const results = [];
 
     const browser = await puppeteer.launch();
@@ -59,14 +54,11 @@ const main = async (urls) => {
         const columnName = `${dayAndMonth[0]}.${dayAndMonth[1]}`;
         columns += columnName + '  ';
     });
-    //console.log('results', results);
     console.log('\x1b[0m', columns);
 
     const lessonType = ['Лекция', 'Практика']
 
     for (const [key, value] of Object.entries(criteria)) {
-        // const lessonCounts = {};
-
         lessonType.forEach((type) => {
             let logMessage = `${value}`;
             const typeLabel = type === 'Лекция' ? 'Лекция  ' : type;
@@ -84,21 +76,15 @@ const main = async (urls) => {
             color = hasLesson ? color : '\x1b[31m';
 
             console.log(color, logMessage);
-            //console.log(logMessage);
         });
         console.log('\x1b[0m', '-'.repeat(200));
     }
 };
 
-// Запуск главной функции
-
 const startingUrl = 'https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/6/lessons?date=2024-01-15';
-// nextUrl will be 'https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/6/lessons?date=2024-01-22';
 const startingDate = new Date('2024-01-15');
-// const endingDate = new Date('2024-05-27');
-const endingDate = new Date('2024-05-27');
+const endingDate = new Date('2024-04-15');
 const urls = [startingUrl];
-// generate urls
 let date = startingDate;
 while (date <= endingDate) {
     const newDate = new Date(date);
