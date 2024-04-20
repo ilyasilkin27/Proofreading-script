@@ -1,6 +1,7 @@
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
+import readline from 'readline';
 
 const criteria = {
     'Физкультура': 'Физкультура',
@@ -77,8 +78,22 @@ const generateUrls = (startingUrl, startDate, endDate) => {
     return urls;
 };
 
+const promptForUrl = () => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    return new Promise((resolve) => {
+        rl.question('Please enter the URL: ', (url) => {
+            rl.close();
+            resolve(url);
+        });
+    });
+};
+
 const main = async () => {
-    const startingUrl = 'https://schedule.mstimetables.ru/publications/173aba53-0f37-46e7-b14c-91b2d3ef1af7#/groups/6/lessons?date=2024-01-15';
+    const startingUrl = await promptForUrl();
     const startingDate = new Date('2024-01-15');
     const endingDate = new Date('2024-04-15');
     const urls = generateUrls(startingUrl, startingDate, endingDate);
