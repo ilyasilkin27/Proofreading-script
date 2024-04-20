@@ -1,3 +1,4 @@
+import fs from 'fs';
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 
@@ -32,35 +33,37 @@ const parsePage = async (url, page) => {
         .get();
 };
 
-const printColumns = (urls) => {
+const generateColumns = (urls) => {
     let columns = 'Имя предмета'.padEnd(40) + 'Тип предмета ';
     urls.forEach((url) => {
         const dayAndMonth = url.split('date=')[1].replace('2024-', '').split('-').reverse();
         const columnName = `${dayAndMonth[0]}.${dayAndMonth[1]}`;
         columns += columnName.padEnd(10);
     });
-    console.log('\x1b[0m', columns);
+    return columns + '\n';
 };
 
-const printLessons = (criteria, results) => {
+const generateRows = (criteria, results) => {
+    let rows = '';
     const lessonType = ['Лекция', 'Практика'];
     for (const [key, value] of Object.entries(criteria)) {
         lessonType.forEach((type) => {
-            let logMessage = `${value}`;
+            let row = `${value}`;
             const typeLabel = type === 'Лекция' ? 'Лекция  ' : type;
-            logMessage += `${typeLabel}  `;
+            row += `${typeLabel}  `;
             let hasLesson = false;
             results.forEach((lessons) => {
                 const count = lessons.filter((lesson) => lesson.label === value && lesson.typeLabel === type).length;
                 hasLesson = hasLesson || count > 0;
-                logMessage += `${count * 2}      `;
+                row += `${count * 2}      `;
             });
             let color = type === 'Лекция' ? '\x1b[34m' : '\x1b[32m';
             color = hasLesson ? color : '\x1b[31m';
-            console.log(color, logMessage);
+            rows += row + '\n';
         });
-        console.log('\x1b[0m', '-'.repeat(200));
+        rows += '-'.repeat(200) + '\n';
     }
+    return rows;
 };
 
 const generateUrls = (startingUrl, startDate, endDate) => {
@@ -86,8 +89,12 @@ const main = async () => {
             const page = await browser.newPage();
             return await parsePage(url, page);
         }));
-        printColumns(urls);
-        printLessons(criteria, results);
+        const columns = generateColumns(urls);
+        const rows = generateRows(criteria, results);
+        const data = columns + rows;
+
+        fs.writeFileSync('schedule.csv', data);
+        console.log('CSV file created successfully!');
     } catch (error) {
         console.error(error);
     } finally {
