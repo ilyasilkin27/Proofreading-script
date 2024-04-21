@@ -87,7 +87,7 @@ const promptForUrl = () => {
     });
 
     return new Promise((resolve) => {
-        rl.question('Пожалуйста введите ссылку: ', (url) => {
+        rl.question('Пожалуйста, введите ссылку: ', (url) => {
             rl.close();
             resolve(url);
         });
