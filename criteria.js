@@ -1,75 +1,26 @@
-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
+export default {
+    'Физкультура': 'Физкультура',
+    'Физкультура (онлайн)': 'Физкультура (онлайн)',
+    'История': 'История',
+    'Ин.язык в проф. деятельности - Шлыкова (СПб)': 'Ин. язык Шлыкова (СПб)',
+    'Ин. язык в проф. деятельности - Шлыкова (онлайн)': 'Ин. язык Шлыкова (онлайн)',
+    'Ин.язык в проф. деятельности - Жернакова (СПб)': 'Ин. язык Жернакова (СПб)',
+    'Ин. язык в проф. деятельности - Жернакова (онлайн)': 'Ин. язык Жернакова (онлайн)',
+    'Дискретная математика_Фархетдинова': 'Дискретная математика',
+    'Теория вероятностей и математическая статистика_Фархетдинова': 'Теория вероятностей и математическая статистика',
+    'Разработка программных модулей_Цветкова (СПб)': 'РПМ Цветкова',
+    'Разработка программных модулей_Шайдаюк (СПб)': 'РПМ Шайдаюк',
+    'Прикладное программирование_Шайдаюк (СПб)': 'Прикладное программирование Шайдаюк',
+    'Прикладное программирование_Цветкова (СПб)': 'Прикладное программирование Цветкова',
+    'Основы алгоритмизации и программирования_Цветкова': 'Основы алгоритмизации и программирования (ПП)',
+    'Основы проектирования баз данных_Цветкова': 'Основы проектирования баз данных (ПП)',
+    'Разработка ПМ_Латников (дистант)': 'Разработка ПМ_Латников (дистант)',
+    'Основы алгоритмизации и программирования_Латников (дист)': 'Основы алгоритмизации и программирования_Латников (дист)',
+    'Основы алгоритмизации и программирования_Дернов (дист)': 'Основы алгоритмизации и программирования_Дернов (дист)',
+    'Разработка ПМ_Дернов (дистант)': 'Разработка ПМ_Дернов (дистант)',
+    'Основы проектирования баз данных_Дернов (дист)': 'Основы проектирования баз данных_Дернов (дист)',
+    'Основы проектирования баз данных_Латников': 'Основы проектирования баз данных_Латников',
+    'Разработка програм.модулей_Морозова (Мск)': 'Разработка програм.модулей_Морозова (Мск)',
+    'Основы алгоритмизации и программирования_Морозова (Мск)': 'Основы алгоритмизации и программирования_Морозова (Мск)',
+    'Основы проектирования баз данных_Морозова': 'Основы проектирования баз данных_Морозова',
+};
