@@ -6,14 +6,14 @@ const chooseModule = async (rl) => {
   return new Promise((resolve, reject) => {
     rl.question('Выберите модуль (9 или 11): ', async (answer) => {
       if (answer === '9') {
-        await grade9(); // Ожидание завершения выполнения grade9
+        await grade9();
         resolve();
       } else if (answer === '11') {
-        await grade11(); // Ожидание завершения выполнения grade11
+        await grade11();
         resolve();
       } else {
         console.log('Неверный выбор. Пожалуйста, введите 9 или 11.');
-        resolve(chooseModule()); // Рекурсивный вызов для повторного запроса
+        resolve(chooseModule());
       }
     });
   });
