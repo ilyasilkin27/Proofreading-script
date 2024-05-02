@@ -1,8 +1,8 @@
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
-import readline from 'readline';
-import criteria11 from './criteria11.js';
+import criteria11 from './subjects_criteria/criteria11.js';
+import rl from './helpers/readlineInstance.js';
 
 const parseLesson = (lesson) => {
     const name = lesson.find(':first-child').text().trim();
@@ -57,12 +57,7 @@ const generateUrls = (startingUrl, startDate, endDate) => {
     return urls;
 };
 
-const promptForUrl = () => {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-
+const promptForUrl = (rl) => {
     return new Promise((resolve) => {
         rl.question('Пожалуйста, введите ссылку: ', (url) => {
             rl.close();
@@ -71,8 +66,8 @@ const promptForUrl = () => {
     });
 };
 
-const main = async () => {
-    const startingUrl = await promptForUrl();
+export default async () => {
+    const startingUrl = await promptForUrl(rl);
     const startingDate = new Date('2024-01-15');
     const endingDate = new Date('2024-04-15');
     const urls = generateUrls(startingUrl, startingDate, endingDate);
@@ -95,5 +90,3 @@ const main = async () => {
         await browser.close();
     }
 };
-
-main();
