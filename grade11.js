@@ -2,13 +2,13 @@ import fs from 'fs';
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 import readline from 'readline';
-import criteria from './criteria.js';
+import criteria11 from './criteria11.js';
 
-const parseLesson = ($lesson) => {
-    const name = $lesson.find(':first-child').text().trim();
-    const type = $lesson.find(':nth-child(2)').text().trim();
+const parseLesson = (lesson) => {
+    const name = lesson.find(':first-child').text().trim();
+    const type = lesson.find(':nth-child(2)').text().trim();
     const typeLabel = type === '(ПР)' ? 'Практика' : 'Лекция';
-    return { name, label: criteria[name], typeLabel };
+    return { name, label: criteria11[name], typeLabel };
 };
 
 const parsePage = async (url, page) => {
@@ -30,10 +30,10 @@ const generateColumns = (urls) => {
     return columns + '\n';
 };
 
-const generateRows = (criteria, results) => {
+const generateRows = (criteria11, results) => {
     let rows = '';
     const lessonType = ['Лекция', 'Практика'];
-    for (const [key, value] of Object.entries(criteria)) {
+    for (const [key, value] of Object.entries(criteria11)) {
         lessonType.forEach((type) => {
             let row = `"${value}","${type}",`;
             results.forEach((lessons) => {
@@ -84,10 +84,10 @@ const main = async () => {
             return await parsePage(url, page);
         }));
         const columns = generateColumns(urls);
-        const rows = generateRows(criteria, results);
+        const rows = generateRows(criteria11, results);
         const data = columns + rows;
 
-        fs.writeFileSync('schedule.csv', data);
+        fs.writeFileSync('grade11.csv', data);
         console.log('CSV файл успешно создан!');
     } catch (error) {
         console.error(error);

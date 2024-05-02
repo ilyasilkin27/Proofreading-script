@@ -39,17 +39,25 @@ const endingDate = new Date('2024-06-03');
 
 - npm
 - nodejs
+- Makefile
 
 ## Установка и запуск
 
 - Установка:
 
 ```bash
-npm ci
+make install
 ```
 
 - Запуск:
 
-```bash
-npm start
-```
+    - 11 класс
+
+    ```bash
+    make 11
+    ```
+    - 9 класс
+
+    ```bash
+    make 9
+    ```
