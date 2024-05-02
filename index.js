@@ -4,7 +4,7 @@ import rl from './src/helpers/readlineInstance.js';
 
 const chooseModule = async (rl) => {
   return new Promise((resolve, reject) => {
-    rl.question('Выберите модуль (9 или 11): ', async (answer) => {
+    rl.question('Выберите класс (9 или 11): ', async (answer) => {
       if (answer === '9') {
         await grade9();
         resolve();
